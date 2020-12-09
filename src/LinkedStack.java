@@ -1,22 +1,48 @@
 public class LinkedStack<T> implements Stack<T> {
+    private Node<T> head;
+    private int size;
+
+    static class Node<T> {
+        public T value;
+        public Node<T> next;
+
+        public Node(T item) {
+            value = item;
+            next = null;
+        }
+    }
+
+    public LinkedStack() {
+        head = null;
+        size = 0;
+    }
+
 
     @Override
     public void push(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        Node<T> node = new Node<>(element);
+        if (head != null) {
+            node.next = head;
+        }
+        head = node;
+        size++;
     }
 
     @Override
     public T pop() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        T ret = head.value;
+        head = head.next;
+        size--;
+        return ret;
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return size == 0;
     }
 }

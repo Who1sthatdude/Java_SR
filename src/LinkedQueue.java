@@ -1,4 +1,21 @@
 public class LinkedQueue<T> implements Queue<T> {
+    Node<T> head;
+    int size;
+
+    static class Node<T> {
+        public T value;
+        public Node<T> next;
+
+        public Node(T item) {
+            value = item;
+            next = null;
+        }
+    }
+
+    public LinkedQueue(){
+        head = null;
+        size = 0;
+    }
 
     /**
      * Adds an element to the end of the queue.
@@ -6,8 +23,19 @@ public class LinkedQueue<T> implements Queue<T> {
      * @param element the element to add
      */
     public void add(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
-    }
+            Node<T> newNode = new Node<>(element);
+            if (head == null) {
+                head = newNode;
+            } else {
+                Node<T> current = this.head;
+                while (current.next != null) {
+                    current = current.next;
+                }
+                current.next = newNode;
+            }
+            size++;
+        }
+
 
     /**
      * Retrieves and removes queue head.
@@ -15,7 +43,13 @@ public class LinkedQueue<T> implements Queue<T> {
      * @return an element that was retrieved from the head or null if queue is empty
      */
     public T poll() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        if (head != null) {
+            T ret = head.value;
+            head = head.next;
+            size--;
+            return ret;
+        }
+        return null;
     }
 
     /**
@@ -24,7 +58,7 @@ public class LinkedQueue<T> implements Queue<T> {
      * @return an integer value that is a size of queue
      */
     public int size() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return size;
     }
 
     /**
@@ -33,6 +67,6 @@ public class LinkedQueue<T> implements Queue<T> {
      * @return {@code true} if the queue is empty, returns {@code false} if it's not
      */
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return size==0;
     }
 }
